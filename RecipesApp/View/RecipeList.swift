@@ -9,8 +9,11 @@ import SwiftUI
 
 struct RecipeList: View {
     @Environment(RecipesVM.self) private var controller
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     
     var body: some View {
+        let reduceMotion = reduceMotion
+        
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 16) {
@@ -19,6 +22,11 @@ struct RecipeList: View {
                             RecipeCelda(recipe: recipe)
                         }
                         .buttonStyle(.plain)
+                        .scrollTransition { content, phase in
+                            content
+                                .scaleEffect(phase.isIdentity || reduceMotion ? 1 : 0.92)
+                                .opacity(phase.isIdentity ? 1 : 0.6)
+                        }
                     }
                 }
                 .padding()

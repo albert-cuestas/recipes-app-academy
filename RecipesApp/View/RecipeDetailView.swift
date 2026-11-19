@@ -24,13 +24,11 @@ struct RecipeDetailView: View {
                                 .font(.title2)
                                 .foregroundStyle(.white)
                                 .padding(10)
-                                .background(.ultraThinMaterial, in: Circle())
+                                .glassEffect(in: .circle)   // Liquid Glass: control flotante sobre la foto (iOS 26+)
                                 .padding(12)
                                 .accessibilityHidden(true)
                         }
                 }
-                .accessibilityAddTraits(.isButton)
-                .accessibilityLabel("Ver imagen ampliada")
                 .accessibilityAction { isShowingImage = true }
                 .listRowInsets(EdgeInsets())
                 

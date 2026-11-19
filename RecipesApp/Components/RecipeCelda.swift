@@ -19,7 +19,10 @@ struct RecipeCelda: View {
             header
             details.padding(16)
         }
-        .background(.background, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        .background(
+            Color(.secondarySystemGroupedBackground),
+            in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+        )
         .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
         .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
         .accessibilityElement(children: .ignore)
@@ -80,4 +83,13 @@ struct RecipeCelda: View {
             .padding()
     }
     .environment(\.dynamicTypeSize, .accessibility3)
+}
+
+#Preview("Modo oscuro") {
+    ScrollView {
+        RecipeCelda(recipe: Recipe.previewSample)
+            .padding()
+    }
+    .background(Color(.systemGroupedBackground))
+    .preferredColorScheme(.dark)
 }
