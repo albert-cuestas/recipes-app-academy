@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct RecipesResponse: Decodable, Sendable {
+struct RecipesResponse {
     let recipes: [Recipe]
     let total: Int
     let skip: Int
     let limit: Int
 }
 
-struct Recipe: Decodable, Identifiable, Hashable, Sendable {
+struct Recipe: Identifiable, Hashable {
     let id: Int
     let name: String
     let ingredients: [String]

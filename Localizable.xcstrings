@@ -1,0 +1,67 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ sobre 5, %lld opiniones" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ sobre 5, %2$lld opiniones"
+          }
+        }
+      }
+    },
+    "%lld min" : {
+
+    },
+    "%lld." : {
+
+    },
+    "Calorías por ración" : {
+
+    },
+    "Cargando recetas" : {
+
+    },
+    "Cocción" : {
+
+    },
+    "Dificultad" : {
+
+    },
+    "Etiquetas" : {
+
+    },
+    "Ingredientes" : {
+
+    },
+    "No se ha podido cargar la imagen" : {
+
+    },
+    "Preparación" : {
+
+    },
+    "Raciones" : {
+
+    },
+    "Recetas" : {
+
+    },
+    "Resumen" : {
+
+    },
+    "Tiempo total" : {
+
+    },
+    "Tipo de comida" : {
+
+    },
+    "Valoración" : {
+
+    },
+    "Ver imagen ampliada" : {
+
+    }
+  },
+  "version" : "1.3"
+}

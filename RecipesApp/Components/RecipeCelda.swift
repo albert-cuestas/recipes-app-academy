@@ -28,28 +28,7 @@ struct RecipeCelda: View {
     }
     
     private var header: some View {
-        Color.clear
-            .aspectRatio(16 / 9, contentMode: .fit)
-            .overlay {
-                AsyncImage(url: recipe.image) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .controlSize(.large)
-                            .tint(.secondary)
-                    case .success(let image):
-                        image.resizable().scaledToFill()
-                    case .failure:
-                        Image(systemName: "photo")
-                            .font(.system(size: placeholderIconSize))
-                            .foregroundStyle(.secondary)
-                    @unknown default:
-                        EmptyView()
-                    }
-                }
-            }
-            .background(.quaternary)
-            .clipped()
+        RecipeImage(url: recipe.image )
     }
     
     private var details: some View {
