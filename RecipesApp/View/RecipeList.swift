@@ -10,6 +10,7 @@ import SwiftUI
 struct RecipeList: View {
     @Environment(RecipesVM.self) private var controller
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Namespace private var namespace
     
     var body: some View {
         let reduceMotion = reduceMotion
@@ -20,6 +21,7 @@ struct RecipeList: View {
                     ForEach(controller.recipes) { recipe in
                         NavigationLink(value: recipe) {
                             RecipeCelda(recipe: recipe)
+                                 .matchedTransitionSource(id: recipe.id, in: namespace)
                         }
                         .buttonStyle(.plain)
                         .scrollTransition { content, phase in
@@ -35,6 +37,7 @@ struct RecipeList: View {
             .navigationTitle("Recetas")
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)
+                    .navigationTransition(.zoom(sourceID: recipe.id, in: namespace))
             }
         }
     }

@@ -10,6 +10,7 @@ import SwiftUI
 struct RecipeDetailView: View {
     let recipe: Recipe
     @State private var isShowingImage = false
+     @Namespace private var namespace
     
     var body: some View {
         List {
@@ -24,12 +25,14 @@ struct RecipeDetailView: View {
                                 .font(.title2)
                                 .foregroundStyle(.white)
                                 .padding(10)
-                                .glassEffect(in: .circle)   // Liquid Glass: control flotante sobre la foto (iOS 26+)
+                                .glassEffect(in: .circle)
+                                .matchedTransitionSource(id: recipe.id, in: namespace)
                                 .padding(12)
                                 .accessibilityHidden(true)
+                                .accessibilityLabel("Ampliar imagen")
                         }
                 }
-                .accessibilityAction { isShowingImage = true }
+                .accessibilityLabel("Ver imagen ampliada")
                 .listRowInsets(EdgeInsets())
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -95,6 +98,8 @@ struct RecipeDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $isShowingImage) {
             RecipeImageViewer(url: recipe.image, title: recipe.name)
+                // Destino: la sheet sale desde la lupa
+                .navigationTransition(.zoom(sourceID: recipe.id, in: namespace))
         }
     }
     
