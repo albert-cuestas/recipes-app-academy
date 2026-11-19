@@ -11,6 +11,7 @@ struct RecipeDetailView: View {
     let recipe: Recipe
     @State private var isShowingImage = false
     @Namespace private var namespace
+    @ScaledMetric private var tagSpacing = 8.0
     
     var body: some View {
         List {
@@ -87,14 +88,25 @@ struct RecipeDetailView: View {
                 }
             }
             
-            if !recipe.tags.isEmpty || !recipe.mealType.isEmpty {
+            if !recipe.mealType.isEmpty {
+                Section("Tipo de comida") {
+                    FlowLayout(spacing: tagSpacing, lineSpacing: tagSpacing) {
+                        ForEach(recipe.mealType, id: \.self) { meal in
+                            TagCapsule(text: meal, background: .orange.opacity(0.2))
+                        }
+                    }
+                    .accessibilityElement(children: .combine)
+                }
+            }
+            
+            if !recipe.tags.isEmpty {
                 Section("Etiquetas") {
-                    if !recipe.mealType.isEmpty {
-                        LabeledContent("Tipo de comida", value: recipe.mealType.joined(separator: ", "))
+                    FlowLayout(spacing: tagSpacing, lineSpacing: tagSpacing) {
+                        ForEach(recipe.tags, id: \.self) { tag in
+                            TagCapsule(text: tag)
+                        }
                     }
-                    if !recipe.tags.isEmpty {
-                        LabeledContent("Etiquetas", value: recipe.tags.joined(separator: ", "))
-                    }
+                    .accessibilityElement(children: .combine)
                 }
             }
         }
@@ -118,4 +130,11 @@ struct RecipeDetailView: View {
     NavigationStack {
         RecipeDetailView(recipe: .previewSample)
     }
+}
+
+#Preview("Accesibilidad XL") {
+    NavigationStack {
+        RecipeDetailView(recipe: Recipe.previewSample)
+    }
+    .environment(\.dynamicTypeSize, .accessibility3)
 }

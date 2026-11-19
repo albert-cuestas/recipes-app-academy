@@ -80,6 +80,7 @@ extension Recipe {
         //image: URL(string: "https://starwarsgallery.netlify.app/assets/starships/199990.jpg"),
         rating: 4.6,
         reviewCount: 98,
-        mealType: ["Dinner"]
+        mealType: ["Dinner",        "Lunch with",
+                   "Dinner soap del to","cos","asbc"]
     )
 }
