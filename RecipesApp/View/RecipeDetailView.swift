@@ -10,7 +10,7 @@ import SwiftUI
 struct RecipeDetailView: View {
     let recipe: Recipe
     @State private var isShowingImage = false
-     @Namespace private var namespace
+    @Namespace private var namespace
     
     var body: some View {
         List {
@@ -29,7 +29,6 @@ struct RecipeDetailView: View {
                                 .matchedTransitionSource(id: recipe.id, in: namespace)
                                 .padding(12)
                                 .accessibilityHidden(true)
-                                .accessibilityLabel("Ampliar imagen")
                         }
                 }
                 .accessibilityLabel("Ver imagen ampliada")
@@ -46,24 +45,30 @@ struct RecipeDetailView: View {
             // Datos clave
             Section("Resumen") {
                 LabeledContent("Dificultad", value: recipe.difficulty)
-                LabeledContent("Preparación", value: "\(recipe.prepTimeMinutes) min")
-                LabeledContent("Cocción", value: "\(recipe.cookTimeMinutes) min")
-                LabeledContent("Tiempo total", value: "\(recipe.totalMinutes) min")
+                LabeledContent("Preparación", value: recipe.prepTime, format: .recipeTime)
+                LabeledContent("Cocción", value: recipe.cookTime, format: .recipeTime)
+                LabeledContent("Tiempo total", value: recipe.totalTime, format: .recipeTime)
                 LabeledContent("Raciones", value: recipe.servings, format: .number)
-                LabeledContent("Calorías por ración", value: "\(recipe.caloriesPerServing) kcal")
+                LabeledContent(
+                    "Calorías por ración",
+                    value: recipe.caloriesPerServingMeasurement,
+                    format: .measurement(width: .abbreviated, usage: .asProvided)
+                )
                 LabeledContent("Valoración") {
                     HStack(spacing: 4) {
                         Image(systemName: "star.fill")
                         Text(ratingText)
-                    }.foregroundStyle(.orange)
-                        .accessibilityElement(children: .ignore)
-                        .accessibilityLabel("\(ratingText) sobre 5, \(recipe.reviewCount) opiniones")
+                    }
+                    .foregroundStyle(.orange)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("\(ratingText) sobre 5, \(recipe.reviewCount) opiniones")
                 }
             }
             
             if !recipe.ingredients.isEmpty {
                 Section("Ingredientes") {
-                    ForEach(recipe.ingredients, id: \.self) { ingredient in
+                    // Identidad por posición: un ingrediente puede repetirse en la lista.
+                    ForEach(Array(recipe.ingredients.enumerated()), id: \.offset) { _, ingredient in
                         Text(ingredient)
                     }
                 }
@@ -71,12 +76,12 @@ struct RecipeDetailView: View {
             
             if !recipe.instructions.isEmpty {
                 Section("Preparación") {
-                    ForEach(recipe.instructions.indices, id: \.self) { index in
+                    ForEach(Array(recipe.instructions.enumerated()), id: \.offset) { index, step in
                         HStack(alignment: .firstTextBaseline, spacing: 12) {
                             Text("\(index + 1).")
                                 .monospacedDigit()
                                 .foregroundStyle(.secondary)
-                            Text(recipe.instructions[index])
+                            Text(step)
                         }
                     }
                 }

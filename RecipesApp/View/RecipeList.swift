@@ -34,6 +34,20 @@ struct RecipeList: View {
                 .padding()
             }
             .background(Color(.systemGroupedBackground))
+            .overlay {
+                if let error = controller.error {
+                    ContentUnavailableView {
+                        Label("No se han podido cargar las recetas", systemImage: "exclamationmark.triangle")
+                    } description: {
+                        Text(error.localizedDescription)
+                    } actions: {
+                        Button("Reintentar") {
+                            Task { await controller.loadRecipes() }
+                        }
+                        .buttonStyle(.glassProminent)
+                    }
+                }
+            }
             .navigationTitle("Recetas")
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)
@@ -43,7 +57,6 @@ struct RecipeList: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(RecipesPreviewData())) {
     RecipeList()
-        .environment(RecipesVM(repository: RepositoryTest()))
 }

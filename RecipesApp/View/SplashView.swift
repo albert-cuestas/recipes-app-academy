@@ -10,20 +10,20 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         VStack(spacing: 24) {
-              Image("Logo")
-                  .resizable()
-                  .scaledToFit()
-                  .frame(width: 250, height: 250)
-                  .clipShape(.rect(cornerRadius: 26, style: .continuous))
-                  .accessibilityHidden(true)   // decorativo
+            Image(.logo)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 250, height: 250)
+                .clipShape(.rect(cornerRadius: 26, style: .continuous))
+                .accessibilityHidden(true)
 
-              ProgressView("Cargando recetas")
+            ProgressView("Cargando recetas")
                 .foregroundStyle(.launchText)
                 .controlSize(.large)
                 .tint(.launchText)
-          }
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .background(Color("LaunchBackground"))
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.launchBackground)
     }
 }
 

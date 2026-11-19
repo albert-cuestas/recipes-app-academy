@@ -31,7 +31,6 @@ struct RecipeDTO: Decodable {
     let rating: Double
     let reviewCount: Int
     let mealType: [String]
-
 }
 
 extension RecipeDTO {

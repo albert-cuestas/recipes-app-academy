@@ -11,9 +11,6 @@
         }
       }
     },
-    "%lld min" : {
-
-    },
     "%lld." : {
 
     },
@@ -29,13 +26,32 @@
     "Dificultad" : {
 
     },
+    "Error en el JSON: %@" : {
+
+    },
+    "Error general %@" : {
+
+    },
     "Etiquetas" : {
 
+    },
+    "Foto y descripción de la receta: %@, cocina %@, %lld minutos, valoración de %@ sobre 5" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Foto y descripción de la receta: %1$@, cocina %2$@, %3$lld minutos, valoración de %4$@ sobre 5"
+          }
+        }
+      }
     },
     "Ingredientes" : {
 
     },
     "No se ha podido cargar la imagen" : {
+
+    },
+    "No se han podido cargar las recetas" : {
 
     },
     "Preparación" : {
@@ -47,6 +63,9 @@
     "Recetas" : {
 
     },
+    "Reintentar" : {
+
+    },
     "Resumen" : {
 
     },
@@ -54,6 +73,9 @@
 
     },
     "Tipo de comida" : {
+
+    },
+    "URL no válida" : {
 
     },
     "Valoración" : {

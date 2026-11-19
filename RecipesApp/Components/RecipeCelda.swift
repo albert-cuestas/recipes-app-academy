@@ -11,7 +11,6 @@ struct RecipeCelda: View {
     let recipe: Recipe
     
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @ScaledMetric(relativeTo: .largeTitle) private var placeholderIconSize = 56.0
     private let cornerRadius: CGFloat = 20
     
     var body: some View {
@@ -19,11 +18,8 @@ struct RecipeCelda: View {
             header
             details.padding(16)
         }
-        .background(
-            Color(.secondarySystemGroupedBackground),
-            in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(.rect(cornerRadius: cornerRadius, style: .continuous))
         .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
@@ -54,7 +50,11 @@ struct RecipeCelda: View {
         : AnyLayout(HStackLayout())
         
         return layout {
-            Label("\(recipe.totalMinutes) min", systemImage: "clock")
+            Label {
+                Text(recipe.totalTime, format: .recipeTime)
+            } icon: {
+                Image(systemName: "clock")
+            }
             
             if !dynamicTypeSize.isAccessibilitySize { Spacer() }
             
@@ -67,9 +67,10 @@ struct RecipeCelda: View {
         .font(.subheadline)
     }
     
-    private var accessibilityText: String {
+    // Text (LocalizedStringKey) en lugar de String para que la etiqueta entre en el catálogo.
+    private var accessibilityText: Text {
         let rating = recipe.rating.formatted(.number.precision(.fractionLength(1)))
-        return "Foto y descripción de la receta: \(recipe.name), cocina \(recipe.cuisine), \(recipe.totalMinutes) minutos, valoración de \(rating) sobre 5"
+        return Text("Foto y descripción de la receta: \(recipe.name), cocina \(recipe.cuisine), \(recipe.totalMinutes) minutos, valoración de \(rating) sobre 5")
     }
 }
 

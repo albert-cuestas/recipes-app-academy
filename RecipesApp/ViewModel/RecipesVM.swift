@@ -7,24 +7,25 @@
 
 import SwiftUI
 
-
 @Observable
 final class RecipesVM {
-    var recipes: [Recipe] = []
-    var error: RecipeError?
+    private(set) var recipes: [Recipe] = []
+    private(set) var error: RecipeError?
     private let repository: RepositoryProtocol
     
     init(repository: RepositoryProtocol = Repository()) {
         self.repository = repository
     }
     
+    @MainActor
     func loadRecipes() async {
+        error = nil
         do {
-            recipes = try await  repository.getRecipes()
-            self.error = nil
+            recipes = try await repository.getRecipes()
         } catch {
+            guard !Task.isCancelled else { return }
             self.error = error
-            self.recipes = []
+            recipes = []
         }
     }
 }
