@@ -32,7 +32,7 @@ struct RecipeDetailView: View {
                                 .accessibilityHidden(true)
                         }
                 }
-                .accessibilityLabel("Ver imagen ampliada")
+                .accessibilityLabel("View larger image")
                 .listRowInsets(EdgeInsets())
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -44,30 +44,30 @@ struct RecipeDetailView: View {
             }
             
             // Datos clave
-            Section("Resumen") {
-                LabeledContent("Dificultad", value: recipe.difficulty)
-                LabeledContent("Preparación", value: recipe.prepTime, format: .recipeTime)
-                LabeledContent("Cocción", value: recipe.cookTime, format: .recipeTime)
-                LabeledContent("Tiempo total", value: recipe.totalTime, format: .recipeTime)
-                LabeledContent("Raciones", value: recipe.servings, format: .number)
+            Section("Overview") {
+                LabeledContent("Difficulty", value: recipe.difficulty)
+                LabeledContent("Prep time", value: recipe.prepTime, format: .recipeTime)
+                LabeledContent("Cook time", value: recipe.cookTime, format: .recipeTime)
+                LabeledContent("Total time", value: recipe.totalTime, format: .recipeTime)
+                LabeledContent("Servings", value: recipe.servings, format: .number)
                 LabeledContent(
-                    "Calorías por ración",
+                    "Calories per serving",
                     value: recipe.caloriesPerServingMeasurement,
                     format: .measurement(width: .abbreviated, usage: .asProvided)
                 )
-                LabeledContent("Valoración") {
+                LabeledContent("Rating") {
                     HStack(spacing: 4) {
                         Image(systemName: "star.fill")
                         Text(ratingText)
                     }
                     .foregroundStyle(.orange)
                     .accessibilityElement(children: .ignore)
-                    .accessibilityLabel("\(ratingText) sobre 5, \(recipe.reviewCount) opiniones")
+                    .accessibilityLabel("\(ratingValue) out of 5, \(reviewsText)")
                 }
             }
             
             if !recipe.ingredients.isEmpty {
-                Section("Ingredientes") {
+                Section("Ingredients") {
                     // Identidad por posición: un ingrediente puede repetirse en la lista.
                     ForEach(Array(recipe.ingredients.enumerated()), id: \.offset) { _, ingredient in
                         Text(ingredient)
@@ -76,7 +76,7 @@ struct RecipeDetailView: View {
             }
             
             if !recipe.instructions.isEmpty {
-                Section("Preparación") {
+                Section("Instructions") {
                     ForEach(Array(recipe.instructions.enumerated()), id: \.offset) { index, step in
                         HStack(alignment: .firstTextBaseline, spacing: 12) {
                             Text("\(index + 1).")
@@ -89,7 +89,7 @@ struct RecipeDetailView: View {
             }
             
             if !recipe.mealType.isEmpty {
-                Section("Tipo de comida") {
+                Section("Meal type") {
                     FlowLayout(spacing: tagSpacing, lineSpacing: tagSpacing) {
                         ForEach(recipe.mealType, id: \.self) { meal in
                             TagCapsule(text: meal, background: .orange.opacity(0.2))
@@ -100,7 +100,7 @@ struct RecipeDetailView: View {
             }
             
             if !recipe.tags.isEmpty {
-                Section("Etiquetas") {
+                Section("Tags") {
                     FlowLayout(spacing: tagSpacing, lineSpacing: tagSpacing) {
                         ForEach(recipe.tags, id: \.self) { tag in
                             TagCapsule(text: tag)
@@ -120,9 +120,16 @@ struct RecipeDetailView: View {
         }
     }
     
+    private var ratingValue: String {
+        recipe.rating.formatted(.number.precision(.fractionLength(1)))
+    }
+
     private var ratingText: String {
-        let rating = recipe.rating.formatted(.number.precision(.fractionLength(1)))
-        return "\(rating) (\(recipe.reviewCount))"
+        "\(ratingValue) (\(recipe.reviewCount))"
+    }
+
+    private var reviewsText: String {
+        String(localized: "\(recipe.reviewCount) reviews")
     }
 }
 

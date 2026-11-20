@@ -1,106 +1,530 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@ sobre 5, %lld opiniones" : {
+    "%@ out of 5, %@" : {
       "localizations" : {
-        "en" : {
+        "ca" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ sobre 5, %2$lld opiniones"
+            "state" : "translated",
+            "value" : "%1$@ sobre 5, %2$@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ sobre 5, %2$@"
+          }
+        }
+      }
+    },
+    "%lld reviews" : {
+      "localizations" : {
+        "ca" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld opinió"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld opinions"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld review"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld reviews"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld opinión"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld opiniones"
+                }
+              }
+            }
           }
         }
       }
     },
     "%lld." : {
-
+      "shouldTranslate" : false
     },
-    "Buscar recetas" : {
-
-    },
-    "Calorías por ración" : {
-
-    },
-    "Cargando recetas" : {
-
-    },
-    "Cocción" : {
-
-    },
-    "Dificultad" : {
-
-    },
-    "Error en el JSON: %@" : {
-
-    },
-    "Error general %@" : {
-
-    },
-    "Etiquetas" : {
-
-    },
-    "Foto y descripción de la receta: %@, cocina %@, %lld minutos, valoración de %@ sobre 5" : {
+    "Calories per serving" : {
       "localizations" : {
-        "en" : {
+        "ca" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Foto y descripción de la receta: %1$@, cocina %2$@, %3$lld minutos, valoración de %4$@ sobre 5"
+            "state" : "translated",
+            "value" : "Calories per ració"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calorías por ración"
           }
         }
       }
     },
-    "Guardadas" : {
-
+    "Cook time" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cocció"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cocción"
+          }
+        }
+      }
     },
-    "Ingredientes" : {
-
+    "Couldn't load recipes" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'han pogut carregar les receptes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se han podido cargar las recetas"
+          }
+        }
+      }
     },
-    "Las recetas que guardes aparecerán aquí." : {
-
+    "Couldn't load the image" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha pogut carregar la imatge"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se ha podido cargar la imagen"
+          }
+        }
+      }
     },
-    "No se ha podido cargar la imagen" : {
-
+    "Couldn't read the recipe data: %@" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'han pogut llegir les dades de les receptes: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se han podido leer los datos de las recetas: %@"
+          }
+        }
+      }
     },
-    "No se han podido cargar las recetas" : {
-
+    "Difficulty" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dificultat"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dificultad"
+          }
+        }
+      }
     },
-    "Perfil" : {
-
+    "Ingredients" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingredients"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingredientes"
+          }
+        }
+      }
     },
-    "Preparación" : {
-
+    "Instructions" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparació"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparación"
+          }
+        }
+      }
     },
-    "Próximamente podrás gestionar tu perfil aquí." : {
-
+    "Invalid URL" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL no vàlida"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL no válida"
+          }
+        }
+      }
     },
-    "Raciones" : {
-
+    "Loading recipes" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregant receptes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando recetas"
+          }
+        }
+      }
     },
-    "Recetas" : {
-
+    "Meal type" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipus d'àpat"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de comida"
+          }
+        }
+      }
     },
-    "Reintentar" : {
-
+    "No Saved Recipes" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hi ha receptes desades"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin recetas guardadas"
+          }
+        }
+      }
     },
-    "Resumen" : {
-
+    "Overview" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resum"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resumen"
+          }
+        }
+      }
     },
-    "Sin recetas guardadas" : {
-
+    "Prep time" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparació"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preparación"
+          }
+        }
+      }
     },
-    "Tiempo total" : {
-
+    "Profile" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
+          }
+        }
+      }
     },
-    "Tipo de comida" : {
-
+    "Rating" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valoració"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valoración"
+          }
+        }
+      }
     },
-    "URL no válida" : {
-
+    "Recipe photo and description: %@, %@ cuisine, %@, rated %@ out of 5" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto i descripció de la recepta: %1$@, cuina %2$@, %3$@, valoració de %4$@ sobre 5"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto y descripción de la receta: %1$@, cocina %2$@, %3$@, valoración de %4$@ sobre 5"
+          }
+        }
+      }
     },
-    "Valoración" : {
-
+    "Recipes" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Receptes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recetas"
+          }
+        }
+      }
     },
-    "Ver imagen ampliada" : {
-
+    "Recipes you save will appear here." : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les receptes que desis apareixeran aquí."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las recetas que guardes aparecerán aquí."
+          }
+        }
+      }
+    },
+    "Saved" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desades"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardadas"
+          }
+        }
+      }
+    },
+    "Search recipes" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca receptes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar recetas"
+          }
+        }
+      }
+    },
+    "Servings" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Racions"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raciones"
+          }
+        }
+      }
+    },
+    "Something went wrong: %@" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'ha produït un error: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se ha producido un error: %@"
+          }
+        }
+      }
+    },
+    "Tags" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiquetes"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiquetas"
+          }
+        }
+      }
+    },
+    "Total time" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps total"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo total"
+          }
+        }
+      }
+    },
+    "Try Again" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Torna-ho a provar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reintentar"
+          }
+        }
+      }
+    },
+    "View larger image" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra la imatge ampliada"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver imagen ampliada"
+          }
+        }
+      }
+    },
+    "You'll be able to manage your profile here soon." : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aviat podràs gestionar el teu perfil aquí."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Próximamente podrás gestionar tu perfil aquí."
+          }
+        }
+      }
     }
   },
   "version" : "1.3"

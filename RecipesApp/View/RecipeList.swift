@@ -38,11 +38,11 @@ struct RecipeList: View {
             .overlay {
                 if let error = controller.error {
                     ContentUnavailableView {
-                        Label("No se han podido cargar las recetas", systemImage: "exclamationmark.triangle")
+                        Label("Couldn't load recipes", systemImage: "exclamationmark.triangle")
                     } description: {
                         Text(error.localizedDescription)
                     } actions: {
-                        Button("Reintentar") {
+                        Button("Try Again") {
                             Task { await controller.loadRecipes() }
                         }
                         .buttonStyle(.glassProminent)
@@ -51,10 +51,10 @@ struct RecipeList: View {
                     ContentUnavailableView.search(text: controller.searchText)
                 }
             }
-            .navigationTitle("Recetas")
+            .navigationTitle("Recipes")
             .searchable(text: $controller.searchText,
                         placement: .navigationBarDrawer(displayMode: .always),
-                        prompt: "Buscar recetas")
+                        prompt: "Search recipes")
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)
                     .navigationTransition(.zoom(sourceID: recipe.id, in: namespace))
@@ -65,7 +65,7 @@ struct RecipeList: View {
 
 #Preview(traits: .modifier(RecipesPreviewData())) {
     TabView{
-        Tab("Recetas", systemImage: "fork.knife") {
+        Tab("Recipes", systemImage: "fork.knife") {
             RecipeList()
         }
     }

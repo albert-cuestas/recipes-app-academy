@@ -15,11 +15,11 @@ enum RecipeError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .urlNotFound:
-            String(localized: "URL no válida")
+            String(localized: "Invalid URL")
         case .json(let string):
-            String(localized: "Error en el JSON: \(string)")
+            String(localized: "Couldn't read the recipe data: \(string)")
         case .general(let error):
-            String(localized: "Error general \(error.localizedDescription)")
+            String(localized: "Something went wrong: \(error.localizedDescription)")
         }
     }
 }

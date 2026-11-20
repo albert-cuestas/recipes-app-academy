@@ -23,7 +23,6 @@ struct RecipeCelda: View {
         .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
-        .environment(\.locale, Locale(identifier: "es")) // esto deberia ser localizacion dle proyecto pero como mando solo la Zelda pues os lo pongo aqui para que probeis voiceover !!! 🤪
     }
     
     private var header: some View {
@@ -67,10 +66,11 @@ struct RecipeCelda: View {
         .font(.subheadline)
     }
     
-    // Text (LocalizedStringKey) en lugar de String para que la etiqueta entre en el catálogo.
     private var accessibilityText: Text {
         let rating = recipe.rating.formatted(.number.precision(.fractionLength(1)))
-        return Text("Foto y descripción de la receta: \(recipe.name), cocina \(recipe.cuisine), \(recipe.totalMinutes) minutos, valoración de \(rating) sobre 5")
+        let time = recipe.totalTime.formatted(.units(allowed: [.hours, .minutes], width: .wide))
+        
+        return Text("Recipe photo and description: \(recipe.name), \(recipe.cuisine) cuisine, \(time), rated \(rating) out of 5")
     }
 }
 

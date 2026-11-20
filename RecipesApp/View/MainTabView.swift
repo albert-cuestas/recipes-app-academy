@@ -10,15 +10,15 @@ import SwiftUI
 struct MainTabView: View {
     var body: some View {
         TabView {
-            Tab("Recetas", systemImage: "fork.knife") {
+            Tab("Recipes", systemImage: "fork.knife") {
                 RecipeList()
             }
 
-            Tab("Guardadas", systemImage: "bookmark") {
+            Tab("Saved", systemImage: "bookmark") {
                 SavedRecipesView()
             }
 
-            Tab("Perfil", systemImage: "person.crop.circle") {
+            Tab("Profile", systemImage: "person.crop.circle") {
                 ProfileView()
             }
         }
@@ -29,11 +29,11 @@ private struct SavedRecipesView: View {
     var body: some View {
         NavigationStack {
             ContentUnavailableView(
-                "Sin recetas guardadas",
+                "No Saved Recipes",
                 systemImage: "bookmark",
-                description: Text("Las recetas que guardes aparecerán aquí.")
+                description: Text("Recipes you save will appear here.")
             )
-            .navigationTitle("Guardadas")
+            .navigationTitle("Saved")
         }
     }
 }
@@ -42,11 +42,11 @@ private struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ContentUnavailableView(
-                "Perfil",
+                "Profile",
                 systemImage: "person.crop.circle",
-                description: Text("Próximamente podrás gestionar tu perfil aquí.")
+                description: Text("You'll be able to manage your profile here soon.")
             )
-            .navigationTitle("Perfil")
+            .navigationTitle("Profile")
         }
     }
 }

@@ -26,7 +26,7 @@ struct RecipeImageViewer: View {
                         .scaledToFit()   
                 case .failure:
                     ContentUnavailableView(
-                        "No se ha podido cargar la imagen",
+                        "Couldn't load the image",
                         systemImage: "photo"
                     )
                 @unknown default:

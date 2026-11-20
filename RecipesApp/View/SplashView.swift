@@ -17,7 +17,7 @@ struct SplashView: View {
                 .clipShape(.rect(cornerRadius: 26, style: .continuous))
                 .accessibilityHidden(true)
 
-            ProgressView("Cargando recetas")
+            ProgressView("Loading recipes")
                 .foregroundStyle(.launchText)
                 .controlSize(.large)
                 .tint(.launchText)
