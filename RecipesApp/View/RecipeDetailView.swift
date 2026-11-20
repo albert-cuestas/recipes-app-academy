@@ -113,11 +113,34 @@ struct RecipeDetailView: View {
         .listStyle(.insetGrouped)
         .navigationTitle(recipe.name)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ShareLink(item: shareText, subject: Text(recipe.name))
+        }
         .sheet(isPresented: $isShowingImage) {
             RecipeImageViewer(url: recipe.image, title: recipe.name)
-                // Destino: la sheet sale desde la lupa
                 .navigationTransition(.zoom(sourceID: recipe.id, in: namespace))
         }
+    }
+    
+    private var shareText: String {
+        let time = recipe.totalTime.formatted(.recipeTime)
+        let ingredients = recipe.ingredients
+            .map { "- \($0)" }
+            .joined(separator: "\n")
+        let steps = recipe.instructions.enumerated()
+            .map { "\($0.offset + 1). \($0.element)" }
+            .joined(separator: "\n")
+
+        return """
+        \(recipe.name)
+        \(String(localized: "Total time")): \(time)
+
+        \(String(localized: "Ingredients"))
+        \(ingredients)
+
+        \(String(localized: "Instructions"))
+        \(steps)
+        """
     }
     
     private var ratingValue: String {

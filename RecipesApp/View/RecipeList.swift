@@ -33,6 +33,8 @@ struct RecipeList: View {
                     }
                 }
                 .padding()
+            }.refreshable {
+                 await controller.loadRecipes()
             }
             .background(Color(.systemGroupedBackground))
             .overlay {
