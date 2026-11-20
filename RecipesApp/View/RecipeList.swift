@@ -14,11 +14,12 @@ struct RecipeList: View {
     
     var body: some View {
         let reduceMotion = reduceMotion
+        @Bindable var controller = controller
         
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(controller.recipes) { recipe in
+                    ForEach(controller.filteredRecipes) { recipe in
                         NavigationLink(value: recipe) {
                             RecipeCelda(recipe: recipe)
                                  .matchedTransitionSource(id: recipe.id, in: namespace)
@@ -46,9 +47,14 @@ struct RecipeList: View {
                         }
                         .buttonStyle(.glassProminent)
                     }
+                } else if controller.filteredRecipes.isEmpty && !controller.searchText.isEmpty {
+                    ContentUnavailableView.search(text: controller.searchText)
                 }
             }
             .navigationTitle("Recetas")
+            .searchable(text: $controller.searchText,
+                        placement: .navigationBarDrawer(displayMode: .always),
+                        prompt: "Buscar recetas")
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)
                     .navigationTransition(.zoom(sourceID: recipe.id, in: namespace))
@@ -58,5 +64,9 @@ struct RecipeList: View {
 }
 
 #Preview(traits: .modifier(RecipesPreviewData())) {
-    RecipeList()
+    TabView{
+        Tab("Recetas", systemImage: "fork.knife") {
+            RecipeList()
+        }
+    }
 }

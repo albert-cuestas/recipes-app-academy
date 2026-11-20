@@ -14,6 +14,9 @@
     "%lld." : {
 
     },
+    "Buscar recetas" : {
+
+    },
     "Calorías por ración" : {
 
     },
@@ -45,7 +48,13 @@
         }
       }
     },
+    "Guardadas" : {
+
+    },
     "Ingredientes" : {
+
+    },
+    "Las recetas que guardes aparecerán aquí." : {
 
     },
     "No se ha podido cargar la imagen" : {
@@ -54,7 +63,13 @@
     "No se han podido cargar las recetas" : {
 
     },
+    "Perfil" : {
+
+    },
     "Preparación" : {
+
+    },
+    "Próximamente podrás gestionar tu perfil aquí." : {
 
     },
     "Raciones" : {
@@ -67,6 +82,9 @@
 
     },
     "Resumen" : {
+
+    },
+    "Sin recetas guardadas" : {
 
     },
     "Tiempo total" : {

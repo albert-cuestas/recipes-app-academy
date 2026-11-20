@@ -13,6 +13,14 @@ final class RecipesVM {
     private(set) var error: RecipeError?
     private let repository: RepositoryProtocol
     
+    var searchText = ""
+
+    var filteredRecipes: [Recipe] {
+        let query = searchText.trimmingCharacters(in: .whitespaces)
+        guard !query.isEmpty else { return recipes }
+        return recipes.filter { $0.name.localizedStandardContains(query) }
+    }
+
     init(repository: RepositoryProtocol = Repository()) {
         self.repository = repository
     }
