@@ -20,7 +20,7 @@ struct RootView: View {
                 SplashView()
                     .transition(.opacity)
             } else {
-                RecipeList()
+                MainTabView()
                     .transition(.opacity)
             }
         }
