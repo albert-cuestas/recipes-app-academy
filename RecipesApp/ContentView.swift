@@ -8,6 +8,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .environment(RecipesVM(repository: RepositoryTest()))
+        .environment(RecipesVM.preview())
 }
 

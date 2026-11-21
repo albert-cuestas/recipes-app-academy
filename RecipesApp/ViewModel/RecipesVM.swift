@@ -6,36 +6,64 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @Observable
 final class RecipesVM {
     private(set) var recipes: [Recipe] = []
     private(set) var error: RecipeError?
     private let repository: RepositoryProtocol
+    /// Se guarda el contenedor (no solo el contexto) para que viva mientras exista el VM.
+    private let container: ModelContainer
+    /// Contexto del MainActor, igual que este VM.
+    private var context: ModelContext { container.mainContext }
     
-    var searchText = ""
-
-    // TEMPORAL (paso 1): en el paso 2 se sustituye por SwiftData
+    /// IDs de las recetas guardadas. Copia en memoria de SwiftData para que las vistas consulten rápido.
     private(set) var savedIDs: Set<Int> = []
 
-    var filteredRecipes: [Recipe] {
-        let query = searchText.trimmingCharacters(in: .whitespaces)
-        guard !query.isEmpty else { return recipes }
-        return recipes.filter { $0.name.localizedStandardContains(query) }
+    /// Recetas de un ámbito (todas o guardadas), filtradas por nombre.
+    /// La búsqueda no distingue mayúsculas (localizedStandardContains).
+    func recipes(in scope: RecipeScope, matching query: String) -> [Recipe] {
+        let base = switch scope {
+        case .all: recipes
+        case .saved: recipes.filter { savedIDs.contains($0.id) }
+        }
+        let query = query.trimmingCharacters(in: .whitespaces)
+        guard !query.isEmpty else { return base }
+        return base.filter { $0.name.localizedStandardContains(query) }
     }
 
     func isSaved(_ recipe: Recipe) -> Bool {
         savedIDs.contains(recipe.id)
     }
 
+    /// Guarda o quita la receta en SwiftData y actualiza savedIDs.
     func toggleSaved(_ recipe: Recipe) {
-        if savedIDs.remove(recipe.id) == nil {
-            savedIDs.insert(recipe.id)
+        let id = recipe.id
+        if savedIDs.contains(id) {
+            let all = (try? context.fetch(FetchDescriptor<SavedRecipe>())) ?? []
+            for saved in all where saved.recipeID == id {
+                context.delete(saved)
+            }
+        } else {
+            context.insert(SavedRecipe(recipeID: id))
         }
+
+        if context.hasChanges {
+            try? context.save()
+        }
+        loadSavedIDs()
     }
 
-    init(repository: RepositoryProtocol = Repository()) {
+    private func loadSavedIDs() {
+        let all = (try? context.fetch(FetchDescriptor<SavedRecipe>())) ?? []
+        savedIDs = Set(all.map(\.recipeID))
+    }
+
+    init(repository: RepositoryProtocol = Repository(), container: ModelContainer) {
         self.repository = repository
+        self.container = container
+        loadSavedIDs()
     }
     
     @MainActor

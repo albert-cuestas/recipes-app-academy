@@ -31,5 +31,5 @@ struct RootView: View {
 
 #Preview {
     RootView()
-        .environment(RecipesVM(repository: RepositoryTest()))
+        .environment(RecipesVM.preview())
 }

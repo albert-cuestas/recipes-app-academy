@@ -8,15 +8,31 @@
 import SwiftUI
 
 struct RecipeList: View {
+
+    let scope: RecipeScope
+
     @Environment(RecipesVM.self) private var controller
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Namespace private var namespace
-    /// Zona visible de la List (iOS 26), para calcular el efecto de scroll a mano.
+    
     @State private var visibleFrame: CGRect = .zero
+    
+    @State private var searchText = ""
+
+    
+    private var visibleRecipes: [Recipe] {
+        controller.recipes(in: scope, matching: searchText)
+    }
+
+    private var navigationTitleKey: LocalizedStringKey {
+        switch scope {
+        case .all: "Recipes"
+        case .saved: "Saved"
+        }
+    }
     
     var body: some View {
         let reduceMotion = reduceMotion
-        @Bindable var controller = controller
         
         NavigationStack {
             recipesContent(reduceMotion: reduceMotion)
@@ -36,12 +52,20 @@ struct RecipeList: View {
                             }
                             .buttonStyle(.glassProminent)
                         }
-                    } else if controller.filteredRecipes.isEmpty && !controller.searchText.isEmpty {
-                        ContentUnavailableView.search(text: controller.searchText)
+                    } else if visibleRecipes.isEmpty {
+                        if !searchText.isEmpty {
+                            ContentUnavailableView.search(text: searchText)
+                        } else if scope == .saved {
+                            ContentUnavailableView(
+                                "No Saved Recipes",
+                                systemImage: "bookmark",
+                                description: Text("Recipes you save will appear here.")
+                            )
+                        }
                     }
                 }
-                .navigationTitle("Recipes")
-                .searchable(text: $controller.searchText,
+                .navigationTitle(navigationTitleKey)
+                .searchable(text: $searchText,
                             placement: .navigationBarDrawer(displayMode: .always),
                             prompt: "Search recipes")
                 .navigationDestination(for: Recipe.self) { recipe in
@@ -60,7 +84,7 @@ struct RecipeList: View {
         if #available(iOS 27, *) {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(controller.filteredRecipes) { recipe in
+                    ForEach(visibleRecipes) { recipe in
                         recipeRow(recipe)
                             .scrollTransition { content, phase in
                                 content
@@ -73,7 +97,7 @@ struct RecipeList: View {
             }
             .swipeActionsContainer()
         } else {
-            List(controller.filteredRecipes) { recipe in
+            List(visibleRecipes) { recipe in
                 recipeRow(recipe)
                     .visualEffect { [visibleFrame] content, proxy in
                         let frame = proxy.frame(in: .global)
@@ -110,26 +134,40 @@ struct RecipeList: View {
         
         return NavigationLink(value: recipe) {
             RecipeCelda(recipe: recipe, isSaved: isSaved) {
-                controller.toggleSaved(recipe)
+                toggleSaved(recipe)
             }
             .matchedTransitionSource(id: recipe.id, in: namespace)
         }
         .buttonStyle(.plain)
         .swipeActions(edge: .leading) {
             Button {
-                controller.toggleSaved(recipe)
+                toggleSaved(recipe)
             } label: {
                 Label(title, systemImage: icon)
             }
             .tint(tint)
         }
     }
+
+    private func toggleSaved(_ recipe: Recipe) {
+        withAnimation {
+            controller.toggleSaved(recipe)
+        }
+    }
 }
 
-#Preview(traits: .modifier(RecipesPreviewData())) {
-    TabView{
+#Preview("Todas", traits: .modifier(RecipesPreviewData())) {
+    TabView {
         Tab("Recipes", systemImage: "fork.knife") {
-            RecipeList()
+            RecipeList(scope: .all)
+        }
+    }
+}
+
+#Preview("Guardadas", traits: .modifier(RecipesPreviewData())) {
+    TabView {
+        Tab("Saved", systemImage: "bookmark") {
+            RecipeList(scope: .saved)
         }
     }
 }

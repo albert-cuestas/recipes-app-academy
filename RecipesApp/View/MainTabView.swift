@@ -11,29 +11,16 @@ struct MainTabView: View {
     var body: some View {
         TabView {
             Tab("Recipes", systemImage: "fork.knife") {
-                RecipeList()
+                RecipeList(scope: .all)
             }
 
             Tab("Saved", systemImage: "bookmark") {
-                SavedRecipesView()
+                RecipeList(scope: .saved)
             }
 
             Tab("Profile", systemImage: "person.crop.circle") {
                 ProfileView()
             }
-        }
-    }
-}
-
-private struct SavedRecipesView: View {
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(
-                "No Saved Recipes",
-                systemImage: "bookmark",
-                description: Text("Recipes you save will appear here.")
-            )
-            .navigationTitle("Saved")
         }
     }
 }
