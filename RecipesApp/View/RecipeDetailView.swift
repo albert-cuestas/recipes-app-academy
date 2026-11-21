@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     let recipe: Recipe
+    @Environment(RecipesVM.self) private var controller
     @State private var isShowingImage = false
     @Namespace private var namespace
     @ScaledMetric private var tagSpacing = 8.0
@@ -25,7 +26,7 @@ struct RecipeDetailView: View {
                             Image(systemName: "plus.magnifyingglass")
                                 .font(.title2)
                                 .foregroundStyle(.white)
-                                .padding(10)
+                                .frame(width: 44, height: 44)
                                 .glassEffect(in: .circle)
                                 .matchedTransitionSource(id: recipe.id, in: namespace)
                                 .padding(12)
@@ -33,6 +34,13 @@ struct RecipeDetailView: View {
                         }
                 }
                 .accessibilityLabel("View larger image")
+                // Hermano del botón de la imagen, no dentro de su label: así cada botón recibe su toque
+                .overlay(alignment: .topTrailing) {
+                    SaveRecipeButton(isSaved: controller.isSaved(recipe)) {
+                        controller.toggleSaved(recipe)
+                    }
+                    .padding(12)
+                }
                 .listRowInsets(EdgeInsets())
                 
                 VStack(alignment: .leading, spacing: 4) {
@@ -156,13 +164,13 @@ struct RecipeDetailView: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(RecipesPreviewData())) {
     NavigationStack {
         RecipeDetailView(recipe: .previewSample)
     }
 }
 
-#Preview("Accesibilidad XL") {
+#Preview("Accesibilidad XL", traits: .modifier(RecipesPreviewData())) {
     NavigationStack {
         RecipeDetailView(recipe: Recipe.previewSample)
     }

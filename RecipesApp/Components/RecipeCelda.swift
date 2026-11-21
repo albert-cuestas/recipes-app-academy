@@ -9,6 +9,9 @@ import SwiftUI
 
 struct RecipeCelda: View {
     let recipe: Recipe
+    var isSaved = false
+    /// Acción del botón de guardar. Si es nil (previews, otras pantallas), el botón no se muestra.
+    var onToggleSaved: (() -> Void)? = nil
     
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let cornerRadius: CGFloat = 20
@@ -23,10 +26,23 @@ struct RecipeCelda: View {
         .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
+        .accessibilityValue(isSaved ? Text("Bookmarked") : Text(verbatim: ""))
+        // El botón está oculto para VoiceOver (la tarjeta ignora sus hijos):
+        // se expone como acción en el rotor de Acciones.
+        .accessibilityAction(named: isSaved ? Text("Remove from Saved") : Text("Save")) {
+            onToggleSaved?()
+        }
     }
     
     private var header: some View {
-        RecipeImage(url: recipe.image )
+        RecipeImage(url: recipe.image)
+            .overlay(alignment: .topTrailing) {
+                if let onToggleSaved {
+                    SaveRecipeButton(isSaved: isSaved, action: onToggleSaved)
+                        .padding(8)
+                        .accessibilityHidden(true)   // VoiceOver lo recibe como acción de la tarjeta
+                }
+            }
     }
     
     private var details: some View {
@@ -76,6 +92,14 @@ struct RecipeCelda: View {
 
 #Preview {
     RecipeCelda(recipe: Recipe.previewSample).padding()
+}
+
+#Preview("Guardada") {
+    @Previewable @State var isSaved = true
+    RecipeCelda(recipe: Recipe.previewSample, isSaved: isSaved) {
+        isSaved.toggle()
+    }
+    .padding()
 }
 
 #Preview("Accesibilidad XL") {

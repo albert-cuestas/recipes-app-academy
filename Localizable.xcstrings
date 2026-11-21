@@ -78,6 +78,22 @@
     "%lld." : {
       "shouldTranslate" : false
     },
+    "Bookmarked" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desada"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardada"
+          }
+        }
+      }
+    },
     "Calories per serving" : {
       "localizations" : {
         "ca" : {
@@ -378,6 +394,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Las recetas que guardes aparecerán aquí."
+          }
+        }
+      }
+    },
+    "Remove from Saved" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Treu de desades"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar de guardadas"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desa"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         }
       }

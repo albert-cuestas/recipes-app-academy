@@ -15,10 +15,23 @@ final class RecipesVM {
     
     var searchText = ""
 
+    // TEMPORAL (paso 1): en el paso 2 se sustituye por SwiftData
+    private(set) var savedIDs: Set<Int> = []
+
     var filteredRecipes: [Recipe] {
         let query = searchText.trimmingCharacters(in: .whitespaces)
         guard !query.isEmpty else { return recipes }
         return recipes.filter { $0.name.localizedStandardContains(query) }
+    }
+
+    func isSaved(_ recipe: Recipe) -> Bool {
+        savedIDs.contains(recipe.id)
+    }
+
+    func toggleSaved(_ recipe: Recipe) {
+        if savedIDs.remove(recipe.id) == nil {
+            savedIDs.insert(recipe.id)
+        }
     }
 
     init(repository: RepositoryProtocol = Repository()) {
