@@ -6,81 +6,64 @@
 //
 
 import Foundation
+import SwiftData
 
-struct RecipesResponse {
-    let recipes: [Recipe]
-    let total: Int
-    let skip: Int
-    let limit: Int
-}
+/// Receta persistida en SwiftData. Es el modelo que usan directamente las vistas (MV con @Query).
+@Model
+final class Recipe {
+    /// ID de la receta en el JSON. El `id` de Identifiable lo aporta SwiftData (persistentModelID).
+    @Attribute(.unique) var recipeID: Int
+    var name: String
+    var ingredients: [String]
+    var instructions: [String]
+    var prepTimeMinutes: Int
+    var cookTimeMinutes: Int
+    var servings: Int
+    var difficulty: String
+    var cuisine: String
+    var caloriesPerServing: Int
+    var tags: [String]
+    var userId: Int
+    var image: URL?
+    var rating: Double
+    var reviewCount: Int
+    var mealType: [String]
+    var isFavorite: Bool
 
-struct Recipe: Identifiable, Hashable {
-    let id: Int
-    let name: String
-    let ingredients: [String]
-    let instructions: [String]
-    let prepTimeMinutes: Int
-    let cookTimeMinutes: Int
-    let servings: Int
-    let difficulty: String
-    let cuisine: String
-    let caloriesPerServing: Int
-    let tags: [String]
-    let userId: Int
-    let image: URL?
-    let rating: Double
-    let reviewCount: Int
-    let mealType: [String]
-
-    var totalMinutes: Int { prepTimeMinutes + cookTimeMinutes }
-
-    var prepTime: Duration { .seconds(prepTimeMinutes * 60) }
-    var cookTime: Duration { .seconds(cookTimeMinutes * 60) }
-    var totalTime: Duration { .seconds(totalMinutes * 60) }
-    var caloriesPerServingMeasurement: Measurement<UnitEnergy> {
-        Measurement(value: Double(caloriesPerServing), unit: .kilocalories)
+    init(recipeID: Int,
+         name: String,
+         ingredients: [String],
+         instructions: [String],
+         prepTimeMinutes: Int,
+         cookTimeMinutes: Int,
+         servings: Int,
+         difficulty: String,
+         cuisine: String,
+         caloriesPerServing: Int,
+         tags: [String],
+         userId: Int,
+         image: URL?,
+         rating: Double,
+         reviewCount: Int,
+         mealType: [String],
+         isFavorite: Bool = false) {
+        self.recipeID = recipeID
+        self.name = name
+        self.ingredients = ingredients
+        self.instructions = instructions
+        self.prepTimeMinutes = prepTimeMinutes
+        self.cookTimeMinutes = cookTimeMinutes
+        self.servings = servings
+        self.difficulty = difficulty
+        self.cuisine = cuisine
+        self.caloriesPerServing = caloriesPerServing
+        self.tags = tags
+        self.userId = userId
+        self.image = image
+        self.rating = rating
+        self.reviewCount = reviewCount
+        self.mealType = mealType
+        self.isFavorite = isFavorite
     }
 }
 
-extension FormatStyle where Self == Duration.UnitsFormatStyle {
-    static var recipeTime: Self {
-        .units(allowed: [.hours, .minutes], width: .abbreviated)
-    }
-}
-
-extension Recipe {
-    static let previewSample = Recipe(
-        id: 1,
-        name: "Classic Margherita Pizza",
-        ingredients: [
-            "Pizza dough",
-            "Tomato sauce",
-            "Fresh mozzarella cheese",
-            "Fresh basil leaves",
-            "Olive oil",
-            "Salt and pepper to taste"
-        ],
-        instructions: [
-            "Preheat the oven to 475°F (245°C).",
-            "Roll out the pizza dough and spread tomato sauce evenly.",
-            "Top with slices of fresh mozzarella and fresh basil leaves.",
-            "Drizzle with olive oil and season with salt and pepper.",
-            "Bake in the preheated oven for 12-15 minutes or until the crust is golden brown.",
-            "Slice and serve hot."
-        ],
-        prepTimeMinutes: 20,
-        cookTimeMinutes: 15,
-        servings: 4,
-        difficulty: "Easy",
-        cuisine: "Italian",
-        caloriesPerServing: 300,
-        tags: ["Pizza", "Italian"],
-        userId: 166,
-        image: URL(string: "https://cdn.dummyjson.com/recipe-images/1.webp"),
-        //image: URL(string: "https://starwarsgallery.netlify.app/assets/starships/199990.jpg"),
-        rating: 4.6,
-        reviewCount: 98,
-        mealType: ["Dinner",        "Lunch with",
-                   "Dinner soap del to","cos","asbc"]
-    )
-}

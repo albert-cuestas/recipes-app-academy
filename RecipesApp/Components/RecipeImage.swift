@@ -39,6 +39,6 @@ struct RecipeImage: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(RecipesPreviewData())) {
     RecipeImage(url: Recipe.previewSample.image)
 }

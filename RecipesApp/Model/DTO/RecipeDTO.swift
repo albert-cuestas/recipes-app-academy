@@ -34,9 +34,10 @@ struct RecipeDTO: Decodable {
 }
 
 extension RecipeDTO {
+    /// Lo uso para mover de json a db, con el model de momento dejo asi. no acabo entender el como funciona
     var toRecipe: Recipe {
         Recipe(
-            id: id,
+            recipeID: id,
             name: name,
             ingredients: ingredients,
             instructions: instructions,

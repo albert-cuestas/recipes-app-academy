@@ -2,12 +2,10 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        RootView()
+        MainTabView()
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(RecipesPreviewData())) {
     ContentView()
-        .environment(RecipesVM.preview())
 }
-
