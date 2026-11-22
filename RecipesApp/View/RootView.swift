@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
+/// ya no se como hacer para mostrar la vista mientras se carga la app necesito descubri lauchscreen preguntar...
 struct RootView: View {
-    @Environment(RecipesVM.self) private var controller
+    @Query(RootView.anyRecipe) private var recipes: [Recipe]
+
+    private static var anyRecipe: FetchDescriptor<Recipe> {
+        var descriptor = FetchDescriptor<Recipe>()
+        descriptor.fetchLimit = 1
+        return descriptor
+    }
 
     private var isLoading: Bool {
-        controller.recipes.isEmpty && controller.error == nil
+        recipes.isEmpty
     }
 
     var body: some View {
@@ -25,11 +33,9 @@ struct RootView: View {
             }
         }
         .animation(.easeOut(duration: 0.3), value: isLoading)
-        .task { await controller.loadRecipes() }
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(RecipesPreviewData())) {
     RootView()
-        .environment(RecipesVM.preview())
 }

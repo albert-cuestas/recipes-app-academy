@@ -27,8 +27,6 @@ struct RecipeCelda: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
         .accessibilityValue(isSaved ? Text("Bookmarked") : Text(verbatim: ""))
-        // El botón está oculto para VoiceOver (la tarjeta ignora sus hijos):
-        // se expone como acción en el rotor de Acciones.
         .accessibilityAction(named: isSaved ? Text("Remove from Saved") : Text("Save")) {
             onToggleSaved?()
         }
@@ -40,7 +38,7 @@ struct RecipeCelda: View {
                 if let onToggleSaved {
                     SaveRecipeButton(isSaved: isSaved, action: onToggleSaved)
                         .padding(8)
-                        .accessibilityHidden(true)   // VoiceOver lo recibe como acción de la tarjeta
+                        .accessibilityHidden(true)
                 }
             }
     }
@@ -90,11 +88,11 @@ struct RecipeCelda: View {
     }
 }
 
-#Preview {
+#Preview(traits: .modifier(RecipesPreviewData())) {
     RecipeCelda(recipe: Recipe.previewSample).padding()
 }
 
-#Preview("Guardada") {
+#Preview("Guardada", traits: .modifier(RecipesPreviewData())) {
     @Previewable @State var isSaved = true
     RecipeCelda(recipe: Recipe.previewSample, isSaved: isSaved) {
         isSaved.toggle()
@@ -102,7 +100,7 @@ struct RecipeCelda: View {
     .padding()
 }
 
-#Preview("Accesibilidad XL") {
+#Preview("Accesibilidad XL", traits: .modifier(RecipesPreviewData())) {
     ScrollView {
         RecipeCelda(recipe: Recipe.previewSample)
             .padding()
@@ -110,7 +108,7 @@ struct RecipeCelda: View {
     .environment(\.dynamicTypeSize, .accessibility3)
 }
 
-#Preview("Modo oscuro") {
+#Preview("Modo oscuro", traits: .modifier(RecipesPreviewData())) {
     ScrollView {
         RecipeCelda(recipe: Recipe.previewSample)
             .padding()
