@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "· %@" : {
+
+    },
     "%@ out of 5, %@" : {
       "localizations" : {
         "ca" : {
@@ -77,6 +80,22 @@
     },
     "%lld." : {
       "shouldTranslate" : false
+    },
+    "A to Z" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De l'A a la Z"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De la A a la Z"
+          }
+        }
+      }
     },
     "Bookmarked" : {
       "localizations" : {
@@ -171,6 +190,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No se han podido leer los datos de las recetas: %@"
+          }
+        }
+      }
+    },
+    "Cuisine" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuina"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cocina"
+          }
+        }
+      }
+    },
+    "Default" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Per defecte"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por defecto"
           }
         }
       }
@@ -271,6 +322,22 @@
         }
       }
     },
+    "Name" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        }
+      }
+    },
     "No Saved Recipes" : {
       "localizations" : {
         "ca" : {
@@ -283,6 +350,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sin recetas guardadas"
+          }
+        }
+      }
+    },
+    "Order" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordre"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Orden"
           }
         }
       }
@@ -495,6 +578,38 @@
         }
       }
     },
+    "Sort" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordena"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordenar"
+          }
+        }
+      }
+    },
+    "Sort By" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordena per"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ordenar por"
+          }
+        }
+      }
+    },
     "Tags" : {
       "localizations" : {
         "ca" : {
@@ -572,6 +687,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Próximamente podrás gestionar tu perfil aquí."
+          }
+        }
+      }
+    },
+    "Z to A" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De la Z a l'A"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De la Z a la A"
           }
         }
       }

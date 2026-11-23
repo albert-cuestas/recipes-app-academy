@@ -21,6 +21,16 @@ struct RecipeList: View {
     @State private var limit = RecipeList.pageSize
     @Namespace private var namespace
 
+    @AppStorage private var sortField: RecipeSortField
+    @AppStorage private var sortDirection: RecipeSortDirection
+
+    init(scope: RecipeScope) {
+        self.scope = scope
+        // recupero valor guardado en settings app
+        _sortField = AppStorage(wrappedValue: .standard, "sortField.\(scope)")
+        _sortDirection = AppStorage(wrappedValue: .ascending, "sortDirection.\(scope)")
+    }
+
     private var navigationTitleKey: LocalizedStringKey {
         switch scope {
         case .all: "Recipes"
@@ -28,9 +38,37 @@ struct RecipeList: View {
         }
     }
 
+    private var sortMenu: some View {
+        Menu {
+            Picker("Sort By", selection: $sortField) {
+                ForEach(RecipeSortField.allCases) { field in
+                    Text(field.title).tag(field)
+                }
+            }
+            .pickerStyle(.inline)
+            .menuActionDismissBehavior(.disabled)
+
+            if sortField != .standard {
+                Picker("Order", selection: $sortDirection) {
+                    ForEach(RecipeSortDirection.allCases) { direction in
+                        Text(direction.title).tag(direction)
+                    }
+                }
+                .pickerStyle(.inline)
+            }
+        } label: {
+            Label("Sort", systemImage: "arrow.up.arrow.down")
+        }//.menuActionDismissBehavior(.disabled)
+    }
+
     var body: some View {
         NavigationStack {
-            RecipeResults(scope: scope, searchText: searchText, limit: limit, namespace: namespace) {
+            RecipeResults(scope: scope,
+                          searchText: searchText,
+                          sortField: sortField,
+                          sortDirection: sortDirection,
+                          limit: limit,
+                          namespace: namespace) {
                 limit += Self.pageSize   // no me gusta pero acumulo
             }
             .background(Color(.systemGroupedBackground))
@@ -40,6 +78,15 @@ struct RecipeList: View {
                         prompt: "Search recipes")
             .onChange(of: searchText) {
                 limit = Self.pageSize  // no me gusta pero acumulo
+            }
+            .onChange(of: sortField) {
+                limit = Self.pageSize
+            }
+            .onChange(of: sortDirection) {
+                limit = Self.pageSize
+            }
+            .toolbar {
+                sortMenu
             }
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)

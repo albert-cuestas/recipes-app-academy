@@ -27,6 +27,8 @@ struct RecipeResults: View {
 
     init(scope: RecipeScope,
          searchText: String,
+         sortField: RecipeSortField = .standard,
+         sortDirection: RecipeSortDirection = .ascending,
          limit: Int,
          namespace: Namespace.ID,
          onReachEnd: @escaping () -> Void) { //practicando escaping
@@ -39,8 +41,21 @@ struct RecipeResults: View {
             (!favoritesOnly || recipe.isFavorite) &&
             (!hasQuery || recipe.name.localizedStandardContains(query))
         }
-        var descriptor = FetchDescriptor(predicate: predicate,
-                                         sortBy: [SortDescriptor(\.recipeID)])
+    
+        let order = sortDirection.sortOrder
+        let sortBy: [SortDescriptor<Recipe>] = switch sortField {
+        case .standard:
+            [SortDescriptor(\.recipeID)]
+        case .name:
+            [SortDescriptor(\.name, comparator: .localizedStandard, order: order),
+             SortDescriptor(\.recipeID)]
+        case .cuisine:
+            [SortDescriptor(\.cuisine, comparator: .localizedStandard, order: order),
+             SortDescriptor(\.name, comparator: .localizedStandard),
+             SortDescriptor(\.recipeID)]
+        }
+
+        var descriptor = FetchDescriptor(predicate: predicate, sortBy: sortBy)
         descriptor.fetchLimit = limit
         
         _recipes = Query(descriptor, animation: .default) // dice anima pero no veo yo
