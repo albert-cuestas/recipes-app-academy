@@ -40,13 +40,18 @@ struct RecipeList: View {
 
     private var sortMenu: some View {
         Menu {
-            Picker("Sort By", selection: $sortField) {
+            // averigue lo binding creado y con render cada vez aplica comportambiento mejor esperar seleccionen 
+            Section("Sort By") {
                 ForEach(RecipeSortField.allCases) { field in
-                    Text(field.title).tag(field)
+                    Toggle(isOn: Binding(
+                        get: { sortField == field },
+                        set: { isOn in if isOn { sortField = field } }
+                    )) {
+                        Text(field.title)
+                    }
+                    .menuActionDismissBehavior(field == .standard ? .enabled : .disabled)
                 }
             }
-            .pickerStyle(.inline)
-            .menuActionDismissBehavior(.disabled)
 
             if sortField != .standard {
                 Picker("Order", selection: $sortDirection) {
