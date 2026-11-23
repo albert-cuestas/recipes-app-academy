@@ -14,6 +14,8 @@ struct RecipeHeaderSection: View {
     let namespace: Namespace.ID
     let onShowImage: () -> Void
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     var body: some View {
         Section {
             Button(action: onShowImage) {
@@ -43,8 +45,44 @@ struct RecipeHeaderSection: View {
                     .font(.title2.bold())
                 Text(recipe.cuisine)
                     .foregroundStyle(.secondary)
+
+                metadataRow.padding(.top, 8)
             }
         }
+    }
+
+    private var metadataRow: some View {
+        let layout = dynamicTypeSize.isAccessibilitySize
+        ? AnyLayout(VStackLayout(alignment: .leading, spacing: 4))
+        : AnyLayout(HStackLayout(spacing: 16))
+
+        return layout {
+            Label(recipe.totalTime.formatted(.recipeTime),systemImage: "clock")
+
+            Label(recipe.servings.formatted(), systemImage: "person.2")
+                .accessibilityLabel(Text("\(recipe.servings) servings"))
+            
+
+            if !dynamicTypeSize.isAccessibilitySize { Spacer() }
+
+            Label(ratingText, systemImage: "star.fill")
+                .foregroundStyle(.orange)
+                .accessibilityLabel(Text("\(ratingValue) out of 5, \(reviewsText)"))
+        }
+        .font(.subheadline)
+        .foregroundStyle(.primary)
+    }
+
+    private var ratingValue: String {
+        recipe.rating.formatted(.number.precision(.fractionLength(1)))
+    }
+
+    private var ratingText: String {
+        "\(ratingValue) (\(recipe.reviewCount))"
+    }
+
+    private var reviewsText: String {
+        String(localized: "\(recipe.reviewCount) reviews")
     }
 }
 

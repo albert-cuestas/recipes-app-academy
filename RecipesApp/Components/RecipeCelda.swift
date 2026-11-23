@@ -41,6 +41,15 @@ struct RecipeCelda: View {
                         .accessibilityHidden(true)
                 }
             }
+            .overlay(alignment: .bottomLeading) {
+                Label(recipe.servings.formatted(), systemImage: "person.2.fill")
+                    .font(.footnote)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(.gray.opacity(0.85), in: .capsule)
+                    .padding(8)
+            }
     }
     
     private var details: some View {
@@ -83,8 +92,9 @@ struct RecipeCelda: View {
     private var accessibilityText: Text {
         let rating = recipe.rating.formatted(.number.precision(.fractionLength(1)))
         let time = recipe.totalTime.formatted(.units(allowed: [.hours, .minutes], width: .wide))
+        let servings = String(localized: "\(recipe.servings) servings")
         
-        return Text("Recipe photo and description: \(recipe.name), \(recipe.cuisine) cuisine, \(time), rated \(rating) out of 5")
+        return Text("Recipe photo and description: \(recipe.name), \(recipe.cuisine) cuisine, \(time), \(servings), rated \(rating) out of 5")
     }
 }
 

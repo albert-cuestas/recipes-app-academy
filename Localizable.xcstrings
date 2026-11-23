@@ -136,6 +136,64 @@
         }
       }
     },
+    "%lld servings" : {
+      "localizations" : {
+        "ca" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ració"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld racions"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld serving"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld servings"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ración"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld raciones"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld." : {
       "shouldTranslate" : false
     },
@@ -556,34 +614,18 @@
         }
       }
     },
-    "Rating" : {
+    "Recipe photo and description: %@, %@ cuisine, %@, %@, rated %@ out of 5" : {
       "localizations" : {
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valoració"
+            "value" : "Foto i descripció de la recepta: %1$@, cuina %2$@, %3$@, %4$@, valoració de %5$@ sobre 5"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valoración"
-          }
-        }
-      }
-    },
-    "Recipe photo and description: %@, %@ cuisine, %@, rated %@ out of 5" : {
-      "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Foto i descripció de la recepta: %1$@, cuina %2$@, %3$@, valoració de %4$@ sobre 5"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Foto y descripción de la receta: %1$@, cocina %2$@, %3$@, valoración de %4$@ sobre 5"
+            "value" : "Foto y descripción de la receta: %1$@, cocina %2$@, %3$@, %4$@, valoración de %5$@ sobre 5"
           }
         }
       }
@@ -680,22 +722,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Buscar recetas"
-          }
-        }
-      }
-    },
-    "Servings" : {
-      "localizations" : {
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Racions"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Raciones"
           }
         }
       }
