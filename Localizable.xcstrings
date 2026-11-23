@@ -20,6 +20,64 @@
         }
       }
     },
+    "%lld cuisines selected" : {
+      "localizations" : {
+        "ca" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cuina seleccionada"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cuines seleccionades"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cuisine selected"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cuisines selected"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cocina seleccionada"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cocinas seleccionadas"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "%lld reviews" : {
       "localizations" : {
         "ca" : {
@@ -97,6 +155,22 @@
         }
       }
     },
+    "All Cuisines" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Totes les cuines"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todas las cocinas"
+          }
+        }
+      }
+    },
     "Bookmarked" : {
       "localizations" : {
         "ca" : {
@@ -125,6 +199,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Calorías por ración"
+          }
+        }
+      }
+    },
+    "Clear Filters" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Treu els filtres"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitar filtros"
           }
         }
       }
@@ -242,6 +332,22 @@
         }
       }
     },
+    "Filter" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtra"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar"
+          }
+        }
+      }
+    },
     "Ingredients" : {
       "localizations" : {
         "ca" : {
@@ -338,6 +444,22 @@
         }
       }
     },
+    "No Results" : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sense resultats"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin resultados"
+          }
+        }
+      }
+    },
     "No Saved Recipes" : {
       "localizations" : {
         "ca" : {
@@ -350,6 +472,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sin recetas guardadas"
+          }
+        }
+      }
+    },
+    "No recipes match the selected cuisines." : {
+      "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cap recepta no coincideix amb les cuines seleccionades."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninguna receta coincide con las cocinas seleccionadas."
           }
         }
       }

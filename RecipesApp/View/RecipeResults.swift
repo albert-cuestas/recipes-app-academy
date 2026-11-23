@@ -17,6 +17,9 @@ struct RecipeResults: View {
     private let scope: RecipeScope
     private let searchText: String
     private let hasQuery: Bool
+    private let hasCuisineFilter: Bool
+    /// Binding para que el botón "Quitar filtros" del estado vacío pueda limpiar el filtro de RecipeList.
+    @Binding private var selectedCuisines: Set<String>
     private let limit: Int
     private let namespace: Namespace.ID
     private let onReachEnd: () -> Void
@@ -29,6 +32,7 @@ struct RecipeResults: View {
          searchText: String,
          sortField: RecipeSortField = .standard,
          sortDirection: RecipeSortDirection = .ascending,
+         selectedCuisines: Binding<Set<String>> = .constant([]),
          limit: Int,
          namespace: Namespace.ID,
          onReachEnd: @escaping () -> Void) { //practicando escaping
@@ -37,9 +41,14 @@ struct RecipeResults: View {
         let favoritesOnly = scope == .saved
         let hasQuery = !query.isEmpty
 
+        // Constante (Array): #Predicate solo puede usar constantes del ámbito
+        let cuisines = Array(selectedCuisines.wrappedValue)
+        let hasCuisineFilter = !cuisines.isEmpty
+
         let predicate = #Predicate<Recipe> { recipe in
             (!favoritesOnly || recipe.isFavorite) &&
-            (!hasQuery || recipe.name.localizedStandardContains(query))
+            (!hasQuery || recipe.name.localizedStandardContains(query)) &&
+            (!hasCuisineFilter || cuisines.contains(recipe.cuisine))
         }
     
         let order = sortDirection.sortOrder
@@ -63,6 +72,8 @@ struct RecipeResults: View {
         self.scope = scope
         self.searchText = query
         self.hasQuery = hasQuery
+        self.hasCuisineFilter = hasCuisineFilter
+        _selectedCuisines = selectedCuisines
         self.limit = limit
         self.namespace = namespace
         self.onReachEnd = onReachEnd
@@ -74,6 +85,16 @@ struct RecipeResults: View {
                 if recipes.isEmpty {
                     if hasQuery {
                         ContentUnavailableView.search(text: searchText)
+                    } else if hasCuisineFilter {
+                        ContentUnavailableView {
+                            Label("No Results", systemImage: "line.3.horizontal.decrease.circle")
+                        } description: {
+                            Text("No recipes match the selected cuisines.")
+                        } actions: {
+                            Button("Clear Filters") {
+                                selectedCuisines.removeAll()
+                            }
+                        }
                     } else if scope == .saved {
                         ContentUnavailableView(
                             "No Saved Recipes",
